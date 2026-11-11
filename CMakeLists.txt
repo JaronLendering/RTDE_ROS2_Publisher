@@ -22,8 +22,10 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Float64MultiArrayStamped.msg"
+  "msg/UInt32Stamped.msg"
   DEPENDENCIES std_msgs example_interfaces 
 )
+
 rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_typesupport_cpp")
 
 add_library(${PROJECT_NAME}_lib

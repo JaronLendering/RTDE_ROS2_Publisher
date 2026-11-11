@@ -143,6 +143,17 @@ ur_rtde_publisher::msg::Float64MultiArrayStamped RTDEConverter::vector6dToFloat6
   return msg;
 }
 
+ur_rtde_publisher::msg::UInt32Stamped RTDEConverter::uint32ToUint32Stamped(const uint32_t value,
+                                                            const std::string& frame_id,                     
+                                                            const rclcpp::Time& packet_time)
+{
+  ur_rtde_publisher::msg::UInt32Stamped msg;
+  msg.header.stamp = packet_time;
+  msg.header.frame_id = frame_id;
+  msg.num.data = value;
+
+  return msg;
+}
 example_interfaces::msg::ByteMultiArray RTDEConverter::uint32ToByteMultiArray(const uint32_t value)
 {
   example_interfaces::msg::ByteMultiArray msg;

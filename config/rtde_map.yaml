@@ -189,7 +189,7 @@ rtde_variables:
 
   UINT32_to_UINT32:
     rtde_type: "UINT32"
-    output_type: "example_interfaces/UInt32"
+    output_type: "ur_rtde_publisher/UInt32Stamped"
     variables:
       - "runtime_state"
       - "tool_mode"

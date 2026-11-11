@@ -57,6 +57,7 @@
 #include <ur_dashboard_msgs/msg/safety_mode.hpp>
 #include <ur_dashboard_msgs/msg/safety_status.hpp>
 #include <ur_rtde_publisher/msg/float64_multi_array_stamped.hpp>
+#include <ur_rtde_publisher/msg/u_int32_stamped.hpp>
 
 namespace ur_rtde_publisher
 {
@@ -145,6 +146,10 @@ public:
                                                                                              const rclcpp::Time& packet_time);                 
 
   static example_interfaces::msg::ByteMultiArray uint32ToByteMultiArray(const uint32_t value);
+
+  static ur_rtde_publisher::msg::UInt32Stamped uint32ToUint32Stamped(const uint32_t value,
+                                                                      const std::string& frame_id,                     
+                                                                      const rclcpp::Time& packet_time);                 
 
   static example_interfaces::msg::ByteMultiArray uint64ToByteMultiArray(const uint64_t value);
 

@@ -310,16 +310,15 @@ bool RTDEPublisher::createPublisher(ActiveVariable& av)
     RCLCPP_INFO(node_.get_logger(), "Created InertiaStamped publisher for %s on topic %s", av.name.c_str(),
                 av.config.topic.c_str());
 
-  } else if (av.config.output_type == "example_interfaces/UInt32") {
-    auto pub = node_.create_publisher<example_interfaces::msg::UInt32>(av.config.topic, qos);
+  } else if (av.config.output_type == "ur_rtde_publisher/UInt32Stamped") {
+    auto pub = node_.create_publisher<ur_rtde_publisher::msg::UInt32Stamped>(av.config.topic, qos);
 
-    av.publish = [pub, name](const urcl::rtde_interface::DataPackage& pkg, const rclcpp::Time&) {
+    av.publish = [pub, name,frame](const urcl::rtde_interface::DataPackage& pkg, const rclcpp::Time& t) {
       uint32_t value = 0;
       if (!pkg.getData(name, value)) {
         throw std::runtime_error("Failed to get UINT32 data for " + name);
       }
-      example_interfaces::msg::UInt32 msg;
-      msg.data = value;
+      auto msg = RTDEConverter::uint32ToUint32Stamped(value, frame, t);
       pub->publish(msg);
     };
 
