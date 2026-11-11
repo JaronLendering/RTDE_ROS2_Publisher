@@ -127,13 +127,17 @@ geometry_msgs::msg::PointStamped RTDEConverter::vector3dToPointStamped(const std
   return msg;
 }
 
-example_interfaces::msg::Float64MultiArray RTDEConverter::vector6dToFloat64MultiArray(const std::array<double, 6>& data)
+ur_rtde_publisher::msg::Float64MultiArrayStamped RTDEConverter::vector6dToFloat64MultiArrayStamped(const std::array<double, 6>& data, 
+                                                                                                   const std::string& frame_id,                     
+                                                                                                   const rclcpp::Time& packet_time)                 
 {
-  example_interfaces::msg::Float64MultiArray msg;
-  msg.data.reserve(6);
+  ur_rtde_publisher::msg::Float64MultiArrayStamped msg;
+  msg.header.stamp = packet_time;
+  msg.header.frame_id = frame_id;
 
+  msg.array.data.reserve(6);
   for (const auto& value : data) {
-    msg.data.push_back(value);
+    msg.array.data.push_back(value);
   }
 
   return msg;

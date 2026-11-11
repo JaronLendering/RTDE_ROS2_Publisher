@@ -138,7 +138,7 @@ rtde_variables:
 
   VECTOR6D_to_Float64MultiArray:
     rtde_type: "VECTOR6D"
-    output_type: "example_interfaces/Float64MultiArray"
+    output_type: "ur_rtde_publisher/Float64MultiArrayStamped"
     variables:
       - "target_q"
       - "target_qd"

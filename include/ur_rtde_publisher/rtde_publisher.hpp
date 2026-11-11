@@ -52,6 +52,7 @@
 #include <example_interfaces/msg/int32_multi_array.hpp>
 #include <example_interfaces/msg/float64_multi_array.hpp>
 #include <sensor_msgs/msg/temperature.hpp>
+#include <ur_rtde_publisher/msg/float64_multi_array_stamped.hpp>
 #include <functional>
 #include <string>
 #include <unordered_set>

@@ -17,6 +17,14 @@ find_package(tf2_ros REQUIRED)
 find_package(ur_client_library REQUIRED)
 find_package(ur_dashboard_msgs REQUIRED)
 find_package(yaml-cpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Float64MultiArrayStamped.msg"
+  DEPENDENCIES std_msgs example_interfaces 
+)
+rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_typesupport_cpp")
 
 add_library(${PROJECT_NAME}_lib
   src/rtde_publisher.cpp
@@ -40,6 +48,10 @@ target_link_libraries(${PROJECT_NAME}_lib PUBLIC
   sensor_msgs::sensor_msgs_library
   ur_client_library::urcl
   yaml-cpp
+  ${cpp_typesupport_target}
+)
+add_dependencies(${PROJECT_NAME}_lib
+  ${PROJECT_NAME}__rosidl_generator_cpp
 )
 
 add_executable(ur_rtde_publisher_node
@@ -48,6 +60,7 @@ add_executable(ur_rtde_publisher_node
 target_link_libraries(ur_rtde_publisher_node PUBLIC
   ${PROJECT_NAME}_lib
 )
+
 
 install(TARGETS ${PROJECT_NAME}_lib ur_rtde_publisher_node
   ARCHIVE DESTINATION lib

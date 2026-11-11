@@ -56,6 +56,7 @@
 #include <ur_dashboard_msgs/msg/robot_mode.hpp>
 #include <ur_dashboard_msgs/msg/safety_mode.hpp>
 #include <ur_dashboard_msgs/msg/safety_status.hpp>
+#include <ur_rtde_publisher/msg/float64_multi_array_stamped.hpp>
 
 namespace ur_rtde_publisher
 {
@@ -139,7 +140,9 @@ public:
                                                                  const std::string& frame_id,
                                                                  const rclcpp::Time& packet_time);
 
-  static example_interfaces::msg::Float64MultiArray vector6dToFloat64MultiArray(const std::array<double, 6>& data);
+  static ur_rtde_publisher::msg::Float64MultiArrayStamped vector6dToFloat64MultiArrayStamped(const std::array<double, 6>& data, 
+                                                                                             const std::string& frame_id,                     
+                                                                                             const rclcpp::Time& packet_time);                 
 
   static example_interfaces::msg::ByteMultiArray uint32ToByteMultiArray(const uint32_t value);
 
